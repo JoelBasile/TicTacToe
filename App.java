@@ -4,16 +4,18 @@ public class App {
 
     public static void main(String[] args) {
         char answer = 'Y';
+        Scanner scanner = new Scanner(System.in);
 
         while (answer == 'Y') {
-            play();
-            Scanner myObj = new Scanner(System.in);
+            play(scanner);
             System.out.println("Play again? 'Y' or 'N'");
-            answer = myObj.nextLine().charAt(0);
+            answer = scanner.nextLine().charAt(0);
         }
+
+        scanner.close();
     }
 
-    static void play() {
+    static void play(Scanner scanner) {
         // Create board
         Board board = new Board();
         int turn_num = 0, result;
@@ -30,11 +32,11 @@ public class App {
             } else {
                 player = 'X';
             }
-            
+
             System.out.println("  " + player + "'s turn");
 
-            int row_num = ask_for_input("row");
-            int col_num = ask_for_input("column");
+            int row_num = ask_for_input("row", scanner);
+            int col_num = ask_for_input("column", scanner);
 
             if (!board.check_empty(row_num, col_num)) {
                 System.out.println("\nSlot already filled");
@@ -60,11 +62,10 @@ public class App {
         }
     }
 
-    static int ask_for_input(String section) {
+    static int ask_for_input(String section, Scanner scanner) {
         System.out.println("Enter " + section + " number (1 - 3)");
 
-        Scanner myObj = new Scanner(System.in);
-        int input = Integer.parseInt(myObj.nextLine());
+        int input = Integer.parseInt(scanner.nextLine());
 
         return input - 1;
     }
