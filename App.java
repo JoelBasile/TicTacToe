@@ -30,15 +30,15 @@ public class App {
             } else {
                 player = 'X';
             }
-            System.out.println(player);
-
+            
             System.out.println("  " + player + "'s turn");
 
             int row_num = ask_for_input("row");
             int col_num = ask_for_input("column");
 
             if (!board.check_empty(row_num, col_num)) {
-                System.out.println("Slot already filled");
+                System.out.println("\nSlot already filled");
+                board.print();
                 continue;
             }
 
