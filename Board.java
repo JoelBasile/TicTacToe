@@ -6,11 +6,13 @@ public class Board {
     }
 
     void print() {
-        System.out.println(" " + board[0][0] + " | " + board[0][1] + " | " + board[0][2] + " ");
-        System.out.println("---+---+---");
-        System.out.println(" " + board[1][0] + " | " + board[1][1] + " | " + board[1][2] + " ");
-        System.out.println("---+---+---");
-        System.out.println(" " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + " ");
+        System.out.println("    1   2   3");
+        System.out.println("1   " + board[0][0] + " | " + board[0][1] + " | " + board[0][2] + " ");
+        System.out.println("   ---+---+---");
+        System.out.println("2   " + board[1][0] + " | " + board[1][1] + " | " + board[1][2] + " ");
+        System.out.println("   ---+---+---");
+        System.out.println("3   " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + " ");
+        System.out.println("");
     }
 
     boolean check_empty(int row, int col) {
@@ -21,37 +23,40 @@ public class Board {
         }        
     }
 
-    void set_marker(int row, int col, int counter) {
-        if (counter % 2 == 1) {
-            board[row][col] = 'X';
-        } else {
-            board[row][col] = 'O';
-        }        
+    void set_marker(int row, int col, char player) {
+        board[row][col] = player;      
     }
 
-    boolean check_win() {
+    int check_win(int turn_num) {
+        int win = 1;
+        int draw = 2;
+
         for (int i = 0; i < 3; i++) {
             // Check rows
             if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2]) {
-                return true;
+                return win;
             }
 
             //Check columns
-            if (board[i][0] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
-                return true;
+            if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
+                return win;
             }
         }
 
         // Check diag
         if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
-            return true;
+            return win;
         }
 
         // Check anti-diag
         if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
-            return true;
+            return win;
         }
 
-        return false;
+        if (turn_num == 9) {
+            return draw;
+        }
+
+        return 0;
     }
 }
