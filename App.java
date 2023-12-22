@@ -54,7 +54,7 @@ public class App {
                 game_still_going = false;
                 
             } else if (result == 2) {
-                System.out.println("IT'S A DRAW");
+                System.out.println(" IT'S A DRAW");
                 game_still_going = false;
             }
 
@@ -65,7 +65,7 @@ public class App {
     static int ask_for_input(String section, Scanner scanner) {
         System.out.println("Enter " + section + " number (1 - 3)");
 
-        int input = Integer.parseInt(scanner.nextLine());
+        int input = scanner.nextInt();
 
         return input - 1;
     }
